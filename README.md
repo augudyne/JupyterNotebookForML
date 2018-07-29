@@ -18,7 +18,7 @@ Quickly setup a docker container that serves a jupyter notebook compatible with 
 
 ## 2. Build the docker image
 
--   Takes about 10 minutes to download dependencies. Note: Keras is installed but not needed for Google ML
+Takes about 10 minutes to download dependencies. Note: Keras is installed but not needed for Google ML
 
 `docker build . -t jupyter`
 
