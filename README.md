@@ -1,17 +1,25 @@
 
 # Table of Contents
 
-1.  [Docker Jupyter Notebook for ML](#orga426b1a)
-2.  [Setup steps](#orge67f47a)
-    1.  [Clone this repo into the directory of your choice](#org88c63d7)
-    2.  [Build the docker image](#org99dccca)
-    3.  [(First time) Run the container to serve the notebook.](#org30e7b0a)
-        1.  [Run in current terminal](#org1240109)
-        2.  [Run in backround](#orgb9078bc)
-    4.  [On future runs](#org3796028)
+1.  [Docker Jupyter Notebook for ML](#orgd20180c)
+2.  [Setup steps](#org1d66578)
+    1.  [1. Clone this repo into the directory of your choice](#org8f877e6)
+    2.  [2. Build the docker image](#org1197485)
+    3.  [3. Start the container](#org0982089)
+        1.  [(First time) Run in current terminal](#org0529292)
+        2.  [(Firs time) Run in background](#orgc603605)
+        3.  [(Subsequent) Run from saved container](#org5aae9f4)
+    4.  [4. Login to Jupyter Notebook](#org49423e8)
+3.  [Reference for Docker](#org43fddb7)
+    1.  [`docker build . -t jupyter`](#org08174d2)
+    2.  [`docker images`](#org64bd1e0)
+    3.  [`docker rmi -f $(docker images ls -f dangling=true -q)`](#org9ec9444)
+    4.  [`docker ps`](#orgd14bbf2)
+    5.  [`docker exec <container-name/hash> <container command>`](#org3599741)
+    6.  [`docker run`](#orga2f3d19)
 
 
-<a id="orga426b1a"></a>
+<a id="orgd20180c"></a>
 
 # Docker Jupyter Notebook for ML
 
@@ -21,62 +29,115 @@ Quickly setup a docker container that serves a jupyter notebook compatible with 
 -   Tensorflow 1.0.0
 
 
-<a id="orge67f47a"></a>
+<a id="org1d66578"></a>
 
 # Setup steps
 
 
-<a id="org88c63d7"></a>
+<a id="org8f877e6"></a>
 
-## Clone this repo into the directory of your choice
+## 1. Clone this repo into the directory of your choice
 
 `git clone https://github.com/augudyne/jupyter-notebook-for-ml.git && cd jupyter-notebook-for-ml`
 
 
-<a id="org99dccca"></a>
+<a id="org1197485"></a>
 
-## Build the docker image
+## 2. Build the docker image
 
 -   Takes about 10 minutes to download dependencies. Note: Keras is installed but not needed for Google ML
 
 `docker build . -t jupyter`
 
 
-<a id="org30e7b0a"></a>
+<a id="org0982089"></a>
 
-## (First time) Run the container to serve the notebook.
+## 3. Start the container
 
 -   You can run in terminal or in background.
--   I recommend binding a volume to your workspace so that your work is saved and easily accessible.
+-   The follow commands bind a volume to your workspace so that your work is saved and easily accessible.
 
 
-<a id="org1240109"></a>
+<a id="org0529292"></a>
 
-### Run in current terminal
+### (First time) Run in current terminal
 
 `docker run --name jupyter-notebook -it -p 8888:8888 -v $(pwd)/notebook:/home/jupyter/notebook jupyter`
 
--   Jupyter will display a login link in STDOUT e.g.
 
-`http://(9b2805d551b8 or 127.0.0.1):8888/?token=<some token>`
+<a id="orgc603605"></a>
 
--   Visit <http://localhost:8888/?token=<some token>>
-
-
-<a id="orgb9078bc"></a>
-
-### Run in backround
+### (Firs time) Run in background
 
 `docker run --name jupyter-notebook -d -p 8888:8888 -v $(pwd)/notebook:/home/jupyter/notebook jupyter`
 
--   You will need to retrieve the token from jupyter
+
+<a id="org5aae9f4"></a>
+
+### (Subsequent) Run from saved container
+
+`docker start jupyter-notebook`
+
+
+<a id="org49423e8"></a>
+
+## 4. Login to Jupyter Notebook
 
 `docker exec jupyter-notebook jupyter notebook list`
+Copy and paste the STDOUT link into your web browser
 
 
-<a id="org3796028"></a>
+<a id="org43fddb7"></a>
 
-## On future runs
+# Reference for Docker
 
-`docker run jupyter-notebook`
+Documenting docker commands for other first timers
+
+
+<a id="org08174d2"></a>
+
+## `docker build . -t jupyter`
+
+-   **build:** provide with directory with Dockerfile. Can now create containers (instances) of image named jupyter
+
+
+<a id="org64bd1e0"></a>
+
+## `docker images`
+
+Lists the available docker images we can create containers of
+
+
+<a id="org9ec9444"></a>
+
+## `docker rmi -f $(docker images ls -f dangling=true -q)`
+
+Remove all dangling images. That means those listed as <none> 
+
+-   **rmi:** remove images, -f flag to delete those with existing containers based on images
+
+
+<a id="orgd14bbf2"></a>
+
+## `docker ps`
+
+Lists the processes/active containers
+
+
+<a id="org3599741"></a>
+
+## `docker exec <container-name/hash> <container command>`
+
+Run <container commmand> inside the container. Note: not in bash context generally, but you can do stuff like /bin/bash -c "<blah blah>"
+
+
+<a id="orga2f3d19"></a>
+
+## `docker run`
+
+-   **-it:** uses the current terminal to run the container. Aka STDOUT here
+-   **-d :** runs in background
+-   **-p:** opens port from host:client, where client is the container's ports
+-   **-v:** uses volumes. You can create volumes with `docker create volume <name>` and use with `docker run -v <name>:/path/within/container`. This lets you reuse data if you run it again.
+    Even better, we can *bind* a host directory to the container, so we can easily transfer/persist files. Do `docker run -v /absolute/host/path:/path/within/container <image name>`
 
