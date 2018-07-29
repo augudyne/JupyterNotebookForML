@@ -15,6 +15,8 @@ RUN pip install jupyter tensorflow==1.0.0 jupyter_contrib_nbextensions pandas ma
 
 RUN jupyter contrib nbextension install --user
 RUN jupyter nbextension enable hinterland/hinterland
+RUN echo "{\"load_extensions\":{\"hinterland/hinterland\":true,\"nbextensions_configurator/config_menu/main\":true,\"contrib_nbextensions_help_item/main\":true},\"CodeCell\":{\"cm_config\":{\"indentUnit\":2}}}" > /home/jupyter/.jupyter/nbconfig/notebook.json
+
 
 WORKDIR /home/jupyter/notebook
 

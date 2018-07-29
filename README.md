@@ -51,6 +51,19 @@ The follow commands bind a volume to your workspace so that your work is saved a
 
 Copy and paste the link into your web browser
 
+# FAQ
+## How do I get it to show suggestions?
+
+Hinterland should be on by default (under nbextensions)
+
+Make sure to run the import cells so that variables are defined
+
+Yes, there is this weird bug where it might auto-complete without asking when first entering a cell. LMK if you know how to fix it.
+
+You can also press TAB for method suggestions or SHIFT+TAB for quick docs
+
+## How do I add additional libraries?
+`docker exec jupyter-notebook /bin/bash -c "pip install library"`
 
 # Reference for Docker
 
@@ -69,7 +82,7 @@ Lists the available docker images that we can create containers of
 
 ## `docker rmi -f $(docker images ls -f dangling=true -q)`
 
-Remove all dangling images. That means those listed as ~<none> ~
+Remove all dangling images. That means those listed as `<none>`
 
 -   **rmi:** remove images, -f flag to delete those with existing containers based on images
 
@@ -81,7 +94,7 @@ Lists the processes/active containers
 
 ## `docker exec <container-name/hash> <container command>`
 
-Run <container commmand> inside the container. Note: not in bash context generally, but you can do stuff like `/bin/bash -c "<blah blah>"`
+Runs `container commmand` inside the container. Note: not in bash context generally, but you can do stuff like `/bin/bash -c "<blah blah>"`
 
 
 ## `docker run`
