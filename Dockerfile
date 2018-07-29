@@ -11,7 +11,7 @@ USER jupyter
 
 RUN pip install jupyter
 ENV PATH="/home/jupyter/.local/bin:${PATH}"
-RUN pip install jupyter tensorflow==1.0.0 jupyter_contrib_nbextensions pandas matplotlib sklearn Keras
+RUN pip install jupyter tensorflow==1.0.0 jupyter_contrib_nbextensions pandas matplotlib sklearn Keras seaborn
 
 RUN jupyter contrib nbextension install --user
 RUN jupyter nbextension enable hinterland/hinterland
