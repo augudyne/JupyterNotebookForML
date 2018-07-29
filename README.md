@@ -27,7 +27,7 @@ Takes about 10 minutes to download dependencies. Note: Keras is installed but no
 
 You can run in terminal or in background.
 
-The follow commands bind a volume to your workspace so that your work is saved and easily accessible.
+The following commands bind a volume on your host to your workspace so that your work is saved and easily accessible.
 
 
 ### (First time) Run in current terminal
@@ -39,6 +39,9 @@ The follow commands bind a volume to your workspace so that your work is saved a
 
 `docker run --name jupyter-notebook -d -p 8888:8888 -v $(pwd)/notebook:/home/jupyter/notebook jupyter`
 
+### Stop the container
+
+`docker stop jupyter-notebook`
 
 ### (Subsequent) Run from saved container
 
@@ -49,9 +52,9 @@ The follow commands bind a volume to your workspace so that your work is saved a
 
 `docker exec jupyter-notebook jupyter notebook list`
 
-Copy and paste the link into your web browser
+Copy and paste the link that is printed out into your web browser
 
-Congratulations! You're now in a Jupyter Notebook environment. Note that if you copied and pasted my command to run, then all files in this notebook are saved on your host directory `jupyter-notebook-for-ml/notebook`
+Congratulations! You're now in a Jupyter Notebook environment. Note that if you copied and pasted my command to run, then all files in this notebook are saved on your host directory `path/to/repo/jupyter-notebook-for-ml/notebook`
 
 # FAQ
 ## How do I get it to show suggestions?
@@ -64,13 +67,17 @@ Yes, there is this weird bug where it might auto-complete without asking when fi
 
 You can also press TAB for method suggestions or SHIFT+TAB for quick docs
 
+## When I run the first cell with all the import statement, I get a lot of error messages
+
+Apparently numpy likes to whine, but it's a benign warning that is safely ignored
+
 ## How do I add additional libraries?
+
 `docker exec jupyter-notebook /bin/bash -c "pip install library"`
 
 # Reference for Docker
 
-Documenting docker commands for other first timers
-
+Self-documenting docker commands for other first timers
 
 ## `docker build . -t jupyter`
 
