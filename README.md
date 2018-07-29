@@ -51,6 +51,8 @@ The follow commands bind a volume to your workspace so that your work is saved a
 
 Copy and paste the link into your web browser
 
+Congratulations! You're now in a Jupyter Notebook environment. Note that if you copied and pasted my command to run, then all files in this notebook are saved on your host directory `jupyter-notebook-for-ml/notebook`
+
 
 # Reference for Docker
 
