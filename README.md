@@ -13,7 +13,7 @@ Quickly setup a docker container that serves a jupyter notebook compatible with 
 
 ## 1. Clone this repo into the directory of your choice
 
-`git clone https://github.com/augudyne/jupyter-notebook-for-ml.git && cd jupyter-notebook-for-ml`
+`git clone git@github.com:augudyne/jupyter-notebook-for-ml.git && cd jupyter-notebook-for-ml`
 
 
 ## 2. Build the docker image
