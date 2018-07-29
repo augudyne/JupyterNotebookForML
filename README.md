@@ -35,7 +35,7 @@ The follow commands bind a volume to your workspace so that your work is saved a
 `docker run --name jupyter-notebook -it -p 8888:8888 -v $(pwd)/notebook:/home/jupyter/notebook jupyter`
 
 
-### (Firs time) Run in background
+### (First time) Run in background
 
 `docker run --name jupyter-notebook -d -p 8888:8888 -v $(pwd)/notebook:/home/jupyter/notebook jupyter`
 
