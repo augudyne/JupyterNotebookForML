@@ -2,7 +2,7 @@
 
 # Docker Jupyter Notebook for ML
 
-Quickly setup a docker container that serves a jupyter notebook compatible with Google's Machine Learning Crash Course and provides Hinterland code completion
+Quickly setup a docker container that serves a jupyter notebook compatible with Google's Machine Learning Crash Course and provides Hinterland code completion. Helps avoid the frustrations of python version/package management via conda/virtualenv.
 
 -   Python 2.7
 -   Tensorflow 1.0.0
