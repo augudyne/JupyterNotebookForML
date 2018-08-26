@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 
 # Run a system update and install python
-RUN apt-get update && apt-get install -y python python-pip
+RUN apt-get update && apt-get install -y python python-pip wget
 
 #Create a new system user
 RUN useradd -m jupyter
